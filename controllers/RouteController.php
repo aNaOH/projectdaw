@@ -1,13 +1,22 @@
 <?php
 
 class RouteController extends Controller {
-    private static $routes = [];
+    private static $getRoutes = [];
+    private static $postRoutes = [];
 
-    public static function defineRoute(string $route, string $controller, string $function = "") {
+    public static function get(string $route, string $controller, string $function = "") {
         if ($function != "") {
-            self::$routes[$route] = [$controller, $function];
+            self::$getRoutes[$route] = [$controller, $function];
         } else {
-            self::$routes[$route] = $controller;
+            self::$getRoutes[$route] = $controller;
+        }
+    }
+
+    public static function post(string $route, string $controller, string $function = "") {
+        if ($function != "") {
+            self::$postRoutes[$route] = [$controller, $function];
+        } else {
+            self::$postRoutes[$route] = $controller;
         }
     }
 
@@ -15,7 +24,9 @@ class RouteController extends Controller {
         $uri = $_SERVER['REQUEST_URI'];
         $found = false;
 
-        foreach (self::$routes as $route => $controller) {
+        $routes = ($_SERVER['REQUEST_METHOD'] === "POST") ? self::$postRoutes : self::$getRoutes;
+
+        foreach ($routes as $route => $controller) {
             if ($uri === $route) {
                 if (is_array($controller)) {
                     require $controller[0] . ".php";
