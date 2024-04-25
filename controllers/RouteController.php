@@ -21,7 +21,7 @@ class RouteController extends Controller {
     }
 
     public function execute() {
-        $uri = str_replace(Consts::$app_base_uri, '', $_SERVER['REQUEST_URI']);
+        $uri = Consts::$app_base_uri !== null ? str_replace(Consts::$app_base_uri, '', $_SERVER['REQUEST_URI']) : $_SERVER['REQUEST_URI'];
         $found = false;
 
         $routes = ($_SERVER['REQUEST_METHOD'] === "POST") ? self::$postRoutes : self::$getRoutes;
