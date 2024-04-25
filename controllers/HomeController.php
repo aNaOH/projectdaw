@@ -6,9 +6,5 @@ class HomeController extends Controller{
     {
         ViewController::summon('home');
     }
-
-    public function dashboard()
-    {
-        ViewController::summon('home.dashboard');
-    }
+    
 }

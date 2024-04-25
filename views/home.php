@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lol</title>
-</head>
-<body>
-    <h1>Hola mundo!</h1>
-</body>
-</html>
+<?php
+
+include('./views/templates/app_head.php');
+
+?>
+
+
+<?php
+
+include('./views/templates/app_foot.php');
+
+?>

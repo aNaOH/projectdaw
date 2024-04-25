@@ -21,7 +21,7 @@ class RouteController extends Controller {
     }
 
     public function execute() {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = str_replace(Consts::$app_base_uri, '', $_SERVER['REQUEST_URI']);
         $found = false;
 
         $routes = ($_SERVER['REQUEST_METHOD'] === "POST") ? self::$postRoutes : self::$getRoutes;
@@ -32,13 +32,11 @@ class RouteController extends Controller {
                     require $controller[0] . ".php";
                     $ctrl = new $controller[0]();
                     call_user_func(array($ctrl, $controller[1]));
-
                 }
                 else{
                     require $controller . ".php";
                     $ctrl = new $controller();
                     call_user_func(array($ctrl, "execute"));
-
                 }
 
                 $found = true;
