@@ -1,6 +1,7 @@
 <?php
 
-class User {
+class User
+{
     public $id;
     public $name;
     public $familyName;
@@ -10,7 +11,8 @@ class User {
     public $description;
     public $location;
 
-    public function __construct($name, $familyName, $email, $password, $profilePic = null, $description = null, $location = null) {
+    public function __construct($name, $familyName, $email, $password, $profilePic = null, $description = null, $location = null)
+    {
         $this->name = $name;
         $this->familyName = $familyName;
         $this->email = $email;
@@ -20,24 +22,28 @@ class User {
         $this->location = $location;
     }
 
-    public static function getAll() {
+    public static function getAll()
+    {
         $stmt = Consts::$db_conn->query("SELECT * FROM Users");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getById($id) {
+    public static function getById($id)
+    {
         $stmt = Consts::$db_conn->prepare("SELECT * FROM Users WHERE id = :id");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function getByEmail($email) {
+    public static function getByEmail($email)
+    {
         $stmt = Consts::$db_conn->prepare("SELECT * FROM Users WHERE email = :email");
         $stmt->execute(['email' => $email]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function save() {
+    public function save()
+    {
         if ($this->id) {
 
             Connection::doUpdate(Consts::$db_conn, 'Users', [
@@ -62,6 +68,15 @@ class User {
             ]);
             // Actualizamos el ID del usuario con el último ID insertado
             $this->id = Consts::$db_conn->lastInsertId();
+        }
+    }
+
+    public function delete()
+    {
+        if ($this->id) {
+
+            Connection::doDelete(Consts::$db_conn, 'Users', ['id' => $this->id]);
+
         }
     }
 }

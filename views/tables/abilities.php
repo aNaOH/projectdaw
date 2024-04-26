@@ -1,6 +1,6 @@
 <?php
 
-include('./views/templates/app_head.php');
+include ('./views/templates/app_head.php');
 
 $abilities = $vars['abilities'];
 
@@ -16,10 +16,14 @@ $abilities = $vars['abilities'];
     </thead>
     <tbody>
       <?php foreach ($abilities as $ability) { ?>
-          <tr>
-              <th scope="row"><?= $ability['id'] ?></th>
-              <td><?= $ability['name'] ?></td>
-          </tr>
+        <tr>
+          <th scope="row">
+            <?= $ability['id'] ?>
+          </th>
+          <td>
+            <?= $ability['name'] ?>
+          </td>
+        </tr>
       <?php } ?>
     </tbody>
   </table>
@@ -27,6 +31,6 @@ $abilities = $vars['abilities'];
 
 <?php
 
-include('./views/templates/app_foot.php');
+include ('./views/templates/app_foot.php');
 
 ?>
