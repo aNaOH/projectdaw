@@ -10,7 +10,7 @@
     <link href="/assets/plugins/font-awesome/css/brands.css" rel="stylesheet" />
     <link href="/assets/plugins/font-awesome/css/solid.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 </head>
 <body>
 <?php include('./views/templates/navbar.php');

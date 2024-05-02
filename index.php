@@ -25,8 +25,10 @@ if($currentScript[1] != 'index.php'){
 
 //Routes
 RouteController::get('/', 'HomeController');
-RouteController::get('/users', 'UserController', 'get');
-RouteController::get('/abilities', 'AbilityController', 'get');
+RouteController::get('/login', 'AuthController', 'login');
+RouteController::get('/register', 'AuthController', 'register');
+RouteController::get('/profile', 'AuthController', 'profile');
+
 
 $router = new RouteController;
 
