@@ -30,9 +30,6 @@ RouteController::get('/register', 'AuthController', 'register');
 RouteController::get('/profile', 'AuthController', 'profile');
 
 
-RouteController::post('/abilities', 'AbilityController', 'new');
-
-
 $router = new RouteController;
 
 $router->execute();
