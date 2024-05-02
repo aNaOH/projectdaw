@@ -10,7 +10,7 @@ require_once 'controllers/ViewController.php';
 
 Consts::$db_conn = Connection::connectToDB('localhost', 'tradeskill', 'root', '');
 
-if(!Consts::$db_conn){
+if (!Consts::$db_conn) {
     echo "<h1>Base de datos no conectada</h1>";
     exit;
 }
@@ -18,8 +18,8 @@ if(!Consts::$db_conn){
 //Check if script it's on subfolder
 $currentScript = $_SERVER['PHP_SELF'];
 $currentScript = explode('/', $currentScript);
-if($currentScript[1] != 'index.php'){
-    Consts::$app_base_uri = '/'.$currentScript[1];
+if ($currentScript[1] != 'index.php') {
+    Consts::$app_base_uri = '/' . $currentScript[1];
 }
 
 
@@ -28,6 +28,9 @@ RouteController::get('/', 'HomeController');
 RouteController::get('/login', 'AuthController', 'login');
 RouteController::get('/register', 'AuthController', 'register');
 RouteController::get('/profile', 'AuthController', 'profile');
+
+
+RouteController::post('/abilities', 'AbilityController', 'new');
 
 
 $router = new RouteController;

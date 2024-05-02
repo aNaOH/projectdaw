@@ -1,25 +1,30 @@
 <?php
 
-class Ability {
+class Ability
+{
     public $id;
     public $name;
 
-    public function __construct($name) {
+    public function __construct($name)
+    {
         $this->name = $name;
     }
 
-    public static function getAll() {
+    public static function getAll()
+    {
         $stmt = Consts::$db_conn->query("SELECT * FROM Ability");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function getById($id) {
+    public static function getById($id)
+    {
         $stmt = Consts::$db_conn->prepare("SELECT * FROM Ability WHERE id = :id");
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function save() {
+    public function save()
+    {
         if ($this->id) {
 
             Connection::doUpdate(Consts::$db_conn, 'Ability', [
@@ -32,6 +37,15 @@ class Ability {
             ]);
             // Actualizamos el ID del usuario con el último ID insertado
             $this->id = Consts::$db_conn->lastInsertId();
+        }
+    }
+
+    public function delete()
+    {
+        if ($this->id) {
+
+            Connection::doDelete(Consts::$db_conn, 'Ability', ['id' => $this->id]);
+
         }
     }
 }
