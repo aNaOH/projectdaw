@@ -3,6 +3,7 @@
 class RouteController extends Controller {
     private static $getRoutes = [];
     private static $postRoutes = [];
+    private static $deleteRoutes = [];
 
     public static function get(string $route, string $controller, string $function = "") {
         if ($function != "") {
@@ -47,12 +48,21 @@ class RouteController extends Controller {
         if (!$found) {
             // Si no se encuentra ninguna ruta, redirigir a la página de error 404
             header("HTTP/1.0 404 Not Found");
-            if(!file_exists(Consts::$app_root."\\views\\errors\\404.php"))
+
+            $path = "\\views\\errors\\404.php";
+            $summon = "errors\\404";
+            
+            if(explode('/',$uri)[1] == "admin"){
+                $path = "\\views\\admin\\errors\\404.php";
+                $summon = "admin\\errors\\404";
+            }
+
+            if(!file_exists(Consts::$app_root.$path))
             {
                 echo "<h1>Error 404</h1><h4>NOT FOUND</h4>";
             }
             else{
-                ViewController::summon("errors\\404");
+                ViewController::summon($summon);
             }
         }
     }
