@@ -32,7 +32,17 @@
 	</div>
 
 	<script src="/assets/admin/js/app.js"></script>
+	<script src="/assets/plugins/jquery/jquery-3.7.1.min.js"></script>
 
+	<?php
+
+	if (isset($scripts)) {
+		foreach ($scripts as $script) {
+	?> <script src="<?=$script?>"></script> <?php
+		}
+	}
+
+	?>
 </body>
 
 </html>
