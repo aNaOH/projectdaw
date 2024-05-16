@@ -11,6 +11,16 @@
     <link href="/assets/plugins/font-awesome/css/solid.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    
+    <?php
+
+    if (isset($styles)) {
+        foreach ($styles as $style) {
+    ?> <link href="<?=$style?>" rel="stylesheet"/> <?php
+        }
+    }
+
+    ?>
 </head>
 <body>
 <?php include('./views/templates/navbar.php');

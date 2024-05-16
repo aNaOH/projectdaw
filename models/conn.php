@@ -48,12 +48,12 @@ class Connection {
         return self::executeSql($dbConn, self::DBACTION_DELETE, $table, [], $conditions);
     }
 
-    public static function doSelect($dbConn, $table, $conditions = [])
+    public static function doSelect($dbConn, $table, $conditions = []) : array
     {
-        return self::executeSql($dbConn, self::DBACTION_SELECT, $table, [], $conditions);
+        return self::executeSql($dbConn, self::DBACTION_SELECT, $table, [], $conditions)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    private static function executeSql($dbConn, $action, $table, $data, $conditions = [])
+    private static function executeSql($dbConn, $action, $table, $data, $conditions = []) : PDOStatement
     {
         try {
             $sql = self::generateSql($action, $table, $data, $conditions);

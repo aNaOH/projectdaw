@@ -15,6 +15,8 @@ if (!Consts::$db_conn) {
     exit;
 }
 
+session_start();
+
 //Check if script it's on subfolder
 $currentScript = $_SERVER['PHP_SELF'];
 $currentScript = explode('/', $currentScript);
@@ -27,6 +29,7 @@ if ($currentScript[1] != 'index.php') {
 RouteController::get('/', 'HomeController');
 include('./routes/AuthRoutes.php');
 include('./routes/APIAuthRoutes.php');
+include('./routes/AdminRoutes.php');
 
 
 $router = new RouteController;

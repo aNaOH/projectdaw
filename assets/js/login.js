@@ -58,7 +58,12 @@ var app = new Vue({
             },
             error: function (error) {
               app.submitted = false;
-              app.errorMessage = "Algo ha ido mal... Prueba más tarde"
+              if(error.status == 401){
+                app.errorMessage = "El correo o contraseña no coincide con nuestros registros";
+              }
+              else{
+                app.errorMessage = "Algo ha ido mal... Prueba más tarde";
+              }
               app.error = true;
             }
           });

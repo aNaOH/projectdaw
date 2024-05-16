@@ -9,7 +9,7 @@ class AuthController{
 
     public function register()
     {
-        ViewController::summon('auth/register');
+        ViewController::summon('auth/register', styles: ['/assets/css/locationInput.css'], scripts: ['/assets/js/components/LocationInput.js','/assets/js/register.js']);
     }
     
 }

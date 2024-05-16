@@ -6,5 +6,10 @@ class HomeController extends Controller{
     {
         ViewController::summon('home');
     }
+
+    public function admin()
+    {
+        ViewController::summon('admin/home');
+    }
     
 }
