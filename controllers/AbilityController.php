@@ -17,7 +17,8 @@ class AbilityController
             [
                 "https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.min.css",
                 "https://cdn.datatables.net/buttons/3.0.2/css/buttons.bootstrap5.min.css",
-                "https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.min.css"
+                "https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.min.css",
+                "/assets/admin/css/pages/table.css"
             ],
             [
                 "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
@@ -32,9 +33,13 @@ class AbilityController
                 "https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js",
                 "https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js",
                 "https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap5.js",
-                "/assets/admin/js/pages/abilities.js"
+                "/assets/admin/js/pages/table.js"
             ]
         );
+    }
+
+    public static function newForm(){
+        ViewController::summon("admin/abilities/new");
     }
 
     public static function new()
@@ -43,7 +48,7 @@ class AbilityController
 
         $ability->save();
 
-        self::get();
+        header('Location: /admin/abilities');
     }
 
 

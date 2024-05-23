@@ -1,0 +1,40 @@
+ul.pagination{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+li.dt-paging-button{
+    list-style: none;
+    width: 25px;
+    height: 25px;
+    background-color: #222e3c;
+    border-radius: 25px;
+    text-align: center;
+}
+
+li.dt-paging-button:hover{
+    cursor: pointer;
+}
+
+li.dt-paging-button.disabled{
+    background-color: #222e3c4b;
+}
+
+li.dt-paging-button.active{
+    background-color: #6083aa91;
+}
+
+li.dt-paging-button.disabled>a {
+    cursor: default;
+}
+
+li.dt-paging-button.active>a{
+    cursor: default;
+}
+
+li.dt-paging-button>a{
+    text-decoration: none;
+    color: white;
+}

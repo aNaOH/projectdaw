@@ -53,7 +53,7 @@ class Connection {
         return self::executeSql($dbConn, self::DBACTION_SELECT, $table, [], $conditions)->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    private static function executeSql($dbConn, $action, $table, $data, $conditions = []) : PDOStatement
+    private static function executeSql($dbConn, $action, $table, $data, $conditions = []) : PDOStatement|int
     {
         try {
             $sql = self::generateSql($action, $table, $data, $conditions);
