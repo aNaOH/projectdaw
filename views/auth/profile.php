@@ -16,6 +16,9 @@ include('./views/templates/app_head.php');
                     <b>Ubicación:</b> <?= $user['location'] ?>
                 </h6>
                 <h6><b>Habilidades</b></h6>
+                <?php if ($user['id'] == $_SESSION['user'][0]['id']) { ?>
+                    <a href="/abilities" class="btn btn-primary">Editar habilidades</a>
+                <?php } ?>
                 <?php if (count($abilities) == 0) { ?>
                     <p>Este usuario no tiene habilidades</p>
                 <?php } else { ?>

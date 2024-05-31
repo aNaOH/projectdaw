@@ -5,3 +5,4 @@ RouteController::get('/register', 'AuthController', 'register');
 RouteController::get('/profile', 'AuthController', 'profile');
 RouteController::get('/logout', 'AuthController', 'logout');
 RouteController::get('/works', 'AuthController', 'works');
+RouteController::get('/abilities', 'AuthController', 'abilities');

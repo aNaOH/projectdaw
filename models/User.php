@@ -84,14 +84,55 @@ class User
         
         $stmt = Consts::$db_conn->prepare("SELECT * FROM works WHERE worker = :id");
         $stmt->execute(['id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getWorkedForYou() {
 
         $stmt = Consts::$db_conn->prepare("SELECT * FROM works WHERE client = :id");
         $stmt->execute(['id' => $this->id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getAbilities() {
+        
+        $stmt = Consts::$db_conn->prepare("SELECT * FROM has_ability WHERE user = :id");
+        $stmt->execute(['id' => $this->id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function hasAbility($id) {
+        
+        $stmt = Consts::$db_conn->prepare("SELECT * FROM has_ability WHERE user = :id AND ability = :ability");
+        $stmt->execute(['id' => $this->id, 'ability' => $id]);
+        return isset($stmt->fetch(PDO::FETCH_ASSOC)['id']);
+    }
+
+    public function addAbility($id, $years = 0){
+        if(!$this->hasAbility($id)){
+            return (Connection::doInsert(Consts::$db_conn, 'has_ability', ['user' => $this->id, 'ability' => $id, 'years' => $years]) > 0);
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function editAbility($id, $years){
+        if($this->hasAbility($id)){
+            return (Connection::doUpdate(Consts::$db_conn, 'has_ability', ['user' => $this->id, 'years' => $years], ['ability' => $id]) > 0);
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function removeAbility($id){
+        if(!$this->hasAbility($id)){
+            return (Connection::doDelete(Consts::$db_conn, 'has_ability', ['user' => $this->id, 'ability' => $id]) > 0);
+        }
+        else{
+            return false;
+        }
     }
 }
 

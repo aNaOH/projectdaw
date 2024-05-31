@@ -94,4 +94,19 @@ class APIAuthController{
         exit;
     }
     
+    public function abilities(){
+        require_once('./models/User.php');
+
+        $userInfo = $_SESSION['user'][0];
+
+        $user = new User($userInfo['name'], $userInfo['family_name'], $userInfo['email'], $userInfo['password'], $userInfo['profile_pic'], $userInfo['description'], $userInfo['location']);
+        $user->id = $userInfo['id'];
+
+        $abilities = $user->getAbilities();
+
+        echo json_encode(["abilities" => $abilities]);
+        
+        header('Content-Type: application/json');
+        header('HTTP/1.1 200 OK');
+    }
 }
