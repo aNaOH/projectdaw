@@ -39,7 +39,7 @@ class AbilityController
     }
 
     public static function newForm(){
-        ViewController::summon("admin/abilities/new");
+        ViewController::summon("admin/abilities/form");
     }
 
     public static function new()
@@ -51,5 +51,37 @@ class AbilityController
         header('Location: /admin/abilities');
     }
 
+    public static function editForm($id){
+        ViewController::summon("admin/abilities/form", ['id' => $id]);
+    }
 
+    public static function edit()
+    {
+        $id = $_POST['ability'];
+
+        $abilityRow = Connection::doSelect(Consts::$db_conn, 'ability', ["id" => $id]);
+
+        $ability = new Ability($_POST['name']);
+        $ability->id = $id;
+
+        $ability->save();
+
+        header('Location: /admin/abilities');
+    }
+
+    public static function delete()
+    {
+        $id = $_POST['ability'];
+
+        $abilityRow = Ability::getById($id);
+
+        var_dump($abilityRow);
+
+        $ability = new Ability($abilityRow['name']);
+        $ability->id = $id;
+
+        $ability->delete();
+
+        header('Location: /admin/abilities');
+    }
 }

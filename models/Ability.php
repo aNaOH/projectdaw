@@ -2,7 +2,7 @@
 
 class Ability
 {
-    public $id;
+    public $id = null;
     public $name;
 
     public function __construct($name)
@@ -31,11 +31,11 @@ class Ability
 
     public function save()
     {
-        if ($this->id) {
+        if (isset($this->id)) {
 
             Connection::doUpdate(Consts::$db_conn, 'ability', [
                 'name' => $this->name,
-            ], ['id', $this->id]);
+            ], ['id' => $this->id]);
 
         } else {
             Connection::doInsert(Consts::$db_conn, 'ability', [

@@ -28,16 +28,19 @@ class RouteController extends Controller {
         $routes = ($_SERVER['REQUEST_METHOD'] === "POST") ? self::$postRoutes : self::$getRoutes;
 
         foreach ($routes as $route => $controller) {
-            if ($uri === $route) {
+            $routePattern = preg_replace('/:[^\/]+:/', '([^\/]+)', str_replace('/', '\/', $route));
+            $routePattern = '/^' . $routePattern . '$/';
+
+            if (preg_match($routePattern, $uri, $matches)) {
+                array_shift($matches); // Remove the full match from the array
                 if (is_array($controller)) {
                     require $controller[0] . ".php";
                     $ctrl = new $controller[0]();
-                    call_user_func(array($ctrl, $controller[1]));
-                }
-                else{
+                    call_user_func_array([$ctrl, $controller[1]], $matches);
+                } else {
                     require $controller . ".php";
                     $ctrl = new $controller();
-                    call_user_func(array($ctrl, "execute"));
+                    call_user_func_array([$ctrl, "execute"], $matches);
                 }
 
                 $found = true;
@@ -52,16 +55,14 @@ class RouteController extends Controller {
             $path = "\\views\\errors\\404.php";
             $summon = "errors\\404";
             
-            if(explode('/',$uri)[1] == "admin"){
+            if(explode('/', $uri)[1] == "admin") {
                 $path = "\\views\\admin\\errors\\404.php";
                 $summon = "admin\\errors\\404";
             }
 
-            if(!file_exists(Consts::$app_root.$path))
-            {
+            if (!file_exists(Consts::$app_root . $path)) {
                 echo "<h1>Error 404</h1><h4>NOT FOUND</h4>";
-            }
-            else{
+            } else {
                 ViewController::summon($summon);
             }
         }
