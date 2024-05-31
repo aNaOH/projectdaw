@@ -55,8 +55,16 @@ include('./views/templates/app_head.php');
                 <?php }?>
             </div>
             <div class="col-md-8">
+            <?php if($user['id'] == $_SESSION['user'][0]['id']) { ?>
+                <form action="/api/auth/description" method="post">
+                    <div class="d-flex flex-column gap-2">
+                        <textarea name="description" id="description"><?= $user['description'] ?></textarea>
+                        <input type="submit" class="btn btn-primary" value="Actualizar descripción">
+                    </div>
+                </form>
+            <?php } else {?>
                 <p><?= $user['description'] ?></p>
-
+            <?php } ?>
             </div>
         </div>
     </div>

@@ -38,7 +38,7 @@ if (document.getElementById('app')) {
                 if(this.valid){
                   this.submitted = true;
                   $.ajax({
-                    url: "/api/auth/edit",
+                    url: "/api/auth/location",
                     method: "POST",
                     data: {
                       location: this.location,
