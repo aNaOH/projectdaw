@@ -7,6 +7,7 @@ include('./views/templates/app_head.php');
 <div class="container my-5 d-flex flex-column gap-3">
   <?php
     foreach ($users as $user) {
+      if($user['id'] == $_SESSION['user'][0]['id']) continue;
     ?>
 
         <div class="container d-flex flex-row gap-2 justify-content-between align-items-center bg-primary p-3 rounded text-white">
