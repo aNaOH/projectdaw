@@ -1,22 +1,25 @@
 <?php
 
-class AuthController{
+require('./models/User.php');
 
-    public function login()
+class SearchController extends Controller{
+
+    public function execute()
     {
-        ViewController::summon('auth/login', scripts: ['/assets/js/login.js']);
+        $users = User::getAll();
+
+        ViewController::summon('search', ["users" => $users]);
     }
 
-    public function register()
+    public function profile($id)
     {
-        ViewController::summon('auth/register', styles: ['/assets/css/locationInput.css'], scripts: ['/assets/js/components/LocationInput.js','/assets/js/register.js']);
-    }
-    
-    public function profile(){
+        if($id == $_SESSION['user'][0]["id"]){
+            header('Location: /profile');
+        }
 
         require_once('./models/Ability.php');
 
-        $user = $_SESSION['user'][0];
+        $user = User::getById($id);
         $abilities = Ability::getUserAbilities($user['id']);
 
         ViewController::summon(
@@ -29,4 +32,5 @@ class AuthController{
             ]
         );
     }
+    
 }

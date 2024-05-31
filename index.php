@@ -27,6 +27,9 @@ if ($currentScript[1] != 'index.php') {
 
 //Routes
 RouteController::get('/', 'HomeController');
+RouteController::get('/search', 'SearchController');
+RouteController::get('/profile/:id:', 'SearchController', 'profile');
+
 include('./routes/AuthRoutes.php');
 include('./routes/APIAuthRoutes.php');
 include('./routes/AdminRoutes.php');

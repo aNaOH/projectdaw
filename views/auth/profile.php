@@ -2,8 +2,6 @@
 
 include('./views/templates/app_head.php');
 
-extract($vars);
-
 ?>
 
 <div class="p-5">
@@ -24,10 +22,41 @@ extract($vars);
                     <ul>
                         <li>Programación - 5 años de experiencia</li>
                     </ul>
-                <?php } ?>
+                <?php } 
+                
+                if($user['id'] == $_SESSION['user'][0]['id']) {
+                ?>
+                    <div class="my-8">
+                        <div id="app">
+
+                            <h3>Editar perfil</h3>
+
+                            <div class="form-data" v-if="!submitted">
+                                <div class="forms-inputs mb-4">
+                                    <span>Localidad</span>
+                                    <location-input v-model="location"></location-input>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <button v-on:click.stop.prevent="submit" class="btn btn-primary w-100" v-bind:class="{'is-invalid' : error}">Aplicar cambios</button>
+                                    <div class="invalid-feedback" v-html="errorMessage"></div>
+                                </div>
+                            </div>
+                            <div class="mx-auto" v-else>
+                                <div class="d-flex flex-column">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="sr-only">Cargando...</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                <?php }?>
             </div>
             <div class="col-md-8">
                 <p><?= $user['description'] ?></p>
+
             </div>
         </div>
     </div>

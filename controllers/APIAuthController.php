@@ -46,5 +46,29 @@ class APIAuthController{
         header('HTTP/1.1 200 OK');
         exit;
     }
+
+    public function edit(){
+        require_once('./models/User.php');
+        header('Content-Type: application/json');
+
+        try {
+            $userInfo = $_SESSION['user'][0];
+
+            $user = new User($userInfo['name'], $userInfo['family_name'], $userInfo['email'], $userInfo['password'], $userInfo['profile_pic'], $userInfo['description'], $_POST['location']);
+            $user->id = $userInfo['id'];
+
+            $user->save();
+
+            $_SESSION['user'][0]['location'] = $_POST['location'];
+            echo json_encode(["done" => true]);
+
+            header('HTTP/1.1 200 OK');
+        } catch (\Throwable $th) {
+            echo json_encode(["done" => false, "msg" => $th->getMessage()]);
+
+            header('HTTP/1.1 500 Internal Server Error');
+        }
+        exit;
+    }
     
 }

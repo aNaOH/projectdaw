@@ -54,7 +54,7 @@ var app = new Vue({
               password: this.password
             },
             success: function (response) {
-              
+              window.location = "/";
             },
             error: function (error) {
               app.submitted = false;

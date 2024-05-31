@@ -48,21 +48,21 @@ class User
 
             Connection::doUpdate(Consts::$db_conn, 'Users', [
                 'name' => $this->name,
-                'familyName' => $this->familyName,
+                'family_name' => $this->familyName,
                 'email' => $this->email,
                 'password' => $this->password,
-                'profilePic' => $this->profilePic,
+                'profile_pic' => $this->profilePic,
                 'description' => $this->description,
                 'location' => $this->location
-            ], ['id', $this->id]);
+            ], ['id' => $this->id]);
 
         } else {
             Connection::doInsert(Consts::$db_conn, 'Users', [
                 'name' => $this->name,
-                'familyName' => $this->familyName,
+                'family_name' => $this->familyName,
                 'email' => $this->email,
                 'password' => $this->password,
-                'profilePic' => $this->profilePic,
+                'profile_pic' => $this->profilePic,
                 'description' => $this->description,
                 'location' => $this->location
             ]);

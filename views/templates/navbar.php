@@ -10,13 +10,7 @@
         <a class="nav-link" href="/">Inicio <span class="sr-only">(actual)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Buscar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="/search">Buscar</a>
       </li>
     </ul>
     <div class="text-end">
