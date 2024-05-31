@@ -23,7 +23,7 @@
             <li><a class="dropdown-item" href="/profile">Perfil</a></li>
             <li><a class="dropdown-item" href="#">Mensajes</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+            <li><a class="dropdown-item" href="/logout">Cerrar sesión</a></li>
           </ul>
         </div>
       <?php } else { ?>
