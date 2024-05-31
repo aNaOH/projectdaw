@@ -79,5 +79,19 @@ class User
 
         }
     }
+
+    public function getWorks() {
+        
+        $stmt = Consts::$db_conn->prepare("SELECT * FROM works WHERE worker = :id");
+        $stmt->execute(['id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getWorkedForYou() {
+
+        $stmt = Consts::$db_conn->prepare("SELECT * FROM works WHERE client = :id");
+        $stmt->execute(['id' => $this->id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
